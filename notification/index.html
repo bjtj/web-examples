@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Notification</title></head>
+    <body>
+        <button id="enable-button">Enable notifications</button>
+        <button id="noti-button">Create notification</button>
+        <button id="delay-noti-button">Create notification(delay 3s)</button>
+        <script type="text/javascript">
+         (() => {
+             let noti = null;
+             let supportNotification = ("Notification" in window);
+             if (!supportNotification) {
+                 console.log("This browser does not support notifications.");
+                 return;
+             }
+             let enableBtn = document.querySelector('#enable-button');
+             let notiBtn = document.querySelector('#noti-button');
+             let delayNotiBtn = document.querySelector('#delay-noti-button');
+             console.log(`permission: ${Notification.permission}`);
+             function setVisibleEnableBtn(permission) {
+                 enableBtn.style.display = permission === 'granted' ? 'none' : 'block';
+             }
+             function setVisibleNotiBtn(permission) {
+                 notiBtn.style.display = permission === 'granted' ? 'block' : 'none';
+                 delayNotiBtn.style.display = permission === 'granted' ? 'block' : 'none';
+             }
+             setVisibleEnableBtn(Notification.permission);
+             setVisibleNotiBtn(Notification.permission);
+             function askNotificationPermission() {
+                 Notification.requestPermission().then((permission) => {
+                     console.log(`permission: ${permission}`);
+                     setVisibleEnableBtn(permission);
+                     setVisibleNotiBtn(permission);
+                 });
+             }
+             enableBtn.addEventListener('click', () => {
+                 askNotificationPermission();
+             });
+             function createNotification({text, icon}) {
+                 noti = new Notification('Notification', { body: text, icon: icon });
+             }
+             notiBtn.addEventListener('click', () => {
+                 createNotification({text: 'hello'});
+             });
+             delayNotiBtn.addEventListener('click', () => {
+                 setTimeout(() => {
+                     createNotification({text: '(delay) Hello'});
+                 }, 3000);
+             });
+             document.addEventListener('visibilitychange', () => {
+                 if (document.visibilityState === 'visible') {
+                     noti?.close();
+                 }
+             });
+         })();
+        </script>
+    </body>
+</html>
