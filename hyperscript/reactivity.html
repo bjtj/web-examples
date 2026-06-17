@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Reactivity</title>
+        <link rel="stylesheet" href="./main.css" type="text/css" media="screen" />
+        <script src="https://cdn.jsdelivr.net/npm/hyperscript.org@0.9.91/dist/_hyperscript.min.js"></script>
+    </head>
+    <body _="init js return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; end then set $theme to it">
+        <div>
+            <div _="live put $theme.toUpperCase() into me"></div>
+            <div>
+                <button _="on click set $theme to 'light'">set to light</button>
+                <button _="on click set $theme to 'dark'">set to dark</button>
+            </div>
+        </div>
+        <div style="display: flex; gap: 0.5em;">
+            <div _="init set ^count to 0">
+                <span _="live put ^count into me"></span>
+                <button _="on click increment ^count">inc</button>
+            </div>
+            <div _="init set ^count to 0">
+                <span _="live put ^count into me"></span>
+                <button _="on click increment ^count">inc</button>
+            </div>
+        </div>
+        <!--  -->
+        <div _="live if $theme is 'dark' then set document.documentElement @data-theme to 'dark' else set document.documentElement @data-theme to 'light' end"></div>
+    </body>
+</html>

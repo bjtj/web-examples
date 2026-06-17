@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>theme</title>
+        <link rel="stylesheet" href="./main.css" type="text/css" media="screen" />
+        <script src="https://cdn.jsdelivr.net/npm/hyperscript.org@0.9.91/dist/_hyperscript.min.js"></script>
+        <script type="text/hyperscript">
+         def getDefaultTheme()
+         js return window.matchMedia("(prefers-color-scheme: dark)").matches
+                 ? "dark"
+                 : "light"; end
+         return it
+         end
+        </script>
+    </head>
+    <body _="init get getDefaultTheme() set $theme to it end live set document.documentElement @data-theme to $theme">
+        <div>
+            Hello
+        </div>
+        <div>
+            <span>Dark Mode: </span>
+            <input type="checkbox"
+                   _="init set me.checked to ($theme is 'dark') end
+                         on change if me.checked then set $theme to 'dark' else set $theme to 'light' end"/>
+        </div>
+    </body>
+</html>
+

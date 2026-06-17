@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>attribute</title>
+        <script src="https://cdn.jsdelivr.net/npm/hyperscript.org@0.9.91/dist/_hyperscript.min.js"></script>
+        <style>
+         #box {
+             border: solid 1px black;
+             min-width: 10px;
+             min-height: 10px;
+         }
+         div[data-theme=dark] {
+             background: #000000;
+             color: #ffffff;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="box">
+            Hello
+        </div>
+        <button _="on click set #box @data-theme to 'dark'">dark</button>
+        <button _="on click set #box @data-theme to 'light'">light</button>
+        <input type="checkbox" _="on change if me.checked then set #box @data-theme to 'dark' else set #box @data-theme to 'light'" />
+    </body>
+</html>
