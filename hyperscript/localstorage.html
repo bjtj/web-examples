@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>localstorage</title>
+        <script src="https://cdn.jsdelivr.net/npm/hyperscript.org@0.9.91/dist/_hyperscript.min.js"></script>
+    </head>
+    <body>
+        <div _="init log 'loaded'">
+            <button _="on click alert('hello')">Hello</button>
+            <div>
+                <input type="text" name="str" />
+                <button _="on click set localStorage.str to (previous <input/>).value">SAVE</button>
+            </div>
+            <div>
+                <button _="on click put localStorage.str into (next <pre/>)">LOAD</button>
+                <pre></pre>
+            </div>
+            <div>
+                <button _="on click call localStorage.clear()">CLEAR</button>
+            </div>
+        </div>
+    </body>
+</html>
