@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Theme</title>
+        <link rel="stylesheet" href="./main.css" type="text/css" media="screen" />
+    </head>
+    <body>
+        <div id="theme"></div>
+        <button id="set-dark-mode-button">set dark mode</button>
+        <button id="set-light-mode-button">set light mode</button>
+        <script>
+         function setTheme(theme) {
+             document.documentElement.setAttribute(
+                 "data-theme",
+                 theme
+             );
+             let el = document.querySelector('#theme');
+             el.innerHTML = theme;
+         }
+         
+         (() => {
+             const theme =
+                 window.matchMedia("(prefers-color-scheme: dark)").matches
+                 ? "dark"
+                 : "light";
+
+             setTheme(theme);
+
+             document.querySelector('#set-dark-mode-button').addEventListener('click', () => {
+                 setTheme('dark');
+             });
+             document.querySelector('#set-light-mode-button').addEventListener('click', () => {
+                 setTheme('light');
+             });
+         })();
+        </script>
+    </body>
+</html>
